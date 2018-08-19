@@ -88,7 +88,11 @@ func ScoreWord(word string, dict map[string]bool) (score WordScore) {
 	subsets = GetWordSubsets(word)
 	score.TotalSubwords = len(subsets)
 	score.ValidSubwords = GetValidCount(subsets, dict)
-	score.Score = float64(score.ValidSubwords) / float64(score.TotalSubwords)
+	if score.TotalSubwords == 0 {
+		score.Score = 0
+	} else {
+		score.Score = float64(score.ValidSubwords) / float64(score.TotalSubwords)
+	}
 	return
 }
 
