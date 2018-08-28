@@ -57,6 +57,12 @@ func GetWordSubsets(word string) (subsets []string) {
 	sort.Slice(subsets, func(i, j int) bool {
 		return subsets[i] < subsets[j]
 	})
+	for i = len(subsets) - 2; i >= 0; i-- {
+		if subsets[i] == subsets[i+1] {
+			// Same subset showed up twice, filter it
+			subsets = append(subsets[:i], subsets[i+1:]...)
+		}
+	}
 	return
 }
 
